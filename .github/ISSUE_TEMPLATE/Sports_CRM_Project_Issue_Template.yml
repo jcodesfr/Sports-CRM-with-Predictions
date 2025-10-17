@@ -1,0 +1,72 @@
+name: "Sports CRM Project Task"
+description: "Track progress for each phase of the Sports CRM with Predictions project"
+title: "[Phase]: Short task description"
+labels: ["project", "backend", "frontend", "ml", "testing"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Phase Overview
+        Follow the project outline phases and check off items as you go.
+
+  - type: checkboxes
+    id: phase0
+    attributes:
+      label: Phase 0 — Local Dev Setup
+      options:
+        - label: "Initialized FastAPI + React repo"
+        - label: "Configured local PostgreSQL and Alembic"
+        - label: "Health check and frontend base route working"
+
+  - type: checkboxes
+    id: phase1
+    attributes:
+      label: Phase 1 — Data Model & Migrations
+      options:
+        - label: "Defined models for Team, Player, Fixture, PlayerStat, Prediction, Task"
+        - label: "Generated and ran Alembic migrations"
+        - label: "Created and verified seed script"
+
+  - type: checkboxes
+    id: phase2
+    attributes:
+      label: Phase 2 — Core API
+      options:
+        - label: "Players/Teams/Fixtures CRUD complete"
+        - label: "CSV import for stats functional"
+        - label: "Dashboard summary endpoint returns correct data"
+
+  - type: checkboxes
+    id: phase3
+    attributes:
+      label: Phase 3 — ML Baseline
+      options:
+        - label: "Feature preparation script working"
+        - label: "Training script produces .joblib artifacts"
+        - label: "Prediction endpoint stores results in DB"
+
+  - type: checkboxes
+    id: phase4
+    attributes:
+      label: Phase 4 — Frontend Vertical Slices
+      options:
+        - label: "Players pages (CRUD + stats table)"
+        - label: "Fixtures pages (run predictions)"
+        - label: "Dashboard + Tasks UI complete"
+
+  - type: checkboxes
+    id: phase5
+    attributes:
+      label: Phase 5 — CSV Import & Demo Data
+      options:
+        - label: "Sample CSVs added under /docs/samples"
+        - label: "Import UX verified end-to-end"
+
+  - type: checkboxes
+    id: phase6
+    attributes:
+      label: Phase 6 — Quality & Testing
+      options:
+        - label: "Backend pytest suite passes"
+        - label: "Frontend Vitest suite passes"
+        - label: "README and Makefile up to date"
