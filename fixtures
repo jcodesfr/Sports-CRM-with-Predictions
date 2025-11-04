@@ -1,0 +1,18 @@
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from ..db import get_db
+from .. import models, schemas
+
+router = APIRouter(prefix="/fixtures", tags=["fixtures"])
+
+@router.post("", response_model=schemas.FixtureOut)
+def create_fixture(payload: schemas.FixtureCreate, db: Session = Depends(get_db)):
+    fixture = models.Fixture(**payload.model_dump())
+    db.add(fixture)
+    db.commit()
+    db.refresh(fixture)
+    return fixture
+
+@router.get("", response_model=list[schemas.FixtureOut])
+def list_fixtures(db: Session = Depends(get_db)):
+    return db.query(models.Fixture).all()
