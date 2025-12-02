@@ -16,3 +16,4 @@ def create_team(payload: schemas.TeamCreate, db: Session = Depends(get_db)):
 @router.get("", response_model=list[schemas.TeamOut])
 def list_teams(db: Session = Depends(get_db)):
     return db.query(models.Team).all()
+
