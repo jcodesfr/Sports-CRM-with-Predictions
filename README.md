@@ -9,3 +9,4 @@ To Run Program:
 5) cd into */sports-crm-frontend
 6) Run command "npm run dev"
 7) Visit "http://localhost:5173" to view dev server of frontend
+8) Visit "http://127.0.0.1:8000/" to view backend info
