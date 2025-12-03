@@ -36,9 +36,9 @@ export default function Predictions(){
             <div key={idx} style={{display:'flex', gap:8, alignItems:'center', width:'100%'}}>
               <input style={{flex:1}} placeholder="Player ID" value={it.playerId} onChange={e=>update(idx, 'playerId', e.target.value)} />
               <select value={it.predictionMetric} onChange={e=>update(idx, 'predictionMetric', e.target.value)}>
-                <option value="points">points</option>
-                <option value="assists">assists</option>
-                <option value="rebounds">rebounds</option>
+                <option value="points">Points</option>
+                <option value="assists">Assists</option>
+                <option value="rebounds">Rebounds</option>
                 <option value="xG">xG</option>
               </select>
               <input style={{flex:2}} placeholder="Recent values (comma separated)" value={it.recent} onChange={e=>update(idx, 'recent', e.target.value)} />
