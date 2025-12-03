@@ -10,3 +10,5 @@ To Run Program:
 6) Run command "npm run dev"
 7) Visit "http://localhost:5173" to view dev server of frontend
 8) Visit "http://127.0.0.1:8000/" to view backend info
+   8a) follow "http://127.0.0.1:8000/" with any router name to view that specific backend data (e.g.
+       "http://127.0.0.1:8000/players" would show players backend data
