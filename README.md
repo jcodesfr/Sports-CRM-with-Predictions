@@ -8,3 +8,4 @@ To Run Program:
 4) Open another new Terminal (regular command prompt/cmd)
 5) cd into */sports-crm-frontend
 6) Run command "npm run dev"
+7) Visit "http://localhost:5173" to view dev server of frontend
