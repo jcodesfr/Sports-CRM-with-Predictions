@@ -1,7 +1,9 @@
 # Sports-CRM-with-Predictions
 A basic web app that manages players and games (CRM-style) also generating simple predictions
 
+
 To Run Program:
+(IMPORTANT! DO THESE STEPS IN ORDER, BOOT BACKEND FIRST, THEN FRONTEND)
 
    Booting up the Backend:
    1) Open a new Terminal (regular command prompt/cmd)
