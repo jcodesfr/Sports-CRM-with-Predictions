@@ -3,7 +3,7 @@ A basic web app that manages players and games (CRM-style) also generating simpl
 
 To Run Program:
 1) Open a new Terminal (regular command prompt/cmd)
-2) cd into */env/Scripts/python.exe
+2) cd into [virtual environment location]/[environment name]/Scripts/python.exe
 3) Run command "-m uvicorn main:app --reload"
 4) Open another new Terminal (regular command prompt/cmd)
 5) cd into sports-crm-frontend
