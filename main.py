@@ -1,11 +1,10 @@
-import models
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from db import Base, engine, SessionLocal
-from routers import teams, players, fixtures, predictions
+import models
 from schemas import SportName
+from routers import sports, teams, players, fixtures, predictions
 
 Base.metadata.create_all(bind = engine)
 
@@ -25,7 +24,6 @@ seed_sports()
 
 app = FastAPI(title = "Sports CRM Backend")
 
-# Vite dev server calling API
 origins = [
     "http://127.0.0.1:5173",
     "http://localhost:5173",
@@ -39,6 +37,7 @@ app.add_middleware(
     allow_headers = ["*"],
 )
 
+app.include_router(sports.router)
 app.include_router(teams.router)
 app.include_router(players.router)
 app.include_router(fixtures.router)
@@ -46,4 +45,4 @@ app.include_router(predictions.router)
 
 @app.get("/")
 def root():
-    return {"status": "ok"}
+    return {"ok": True, "service": "sports-crm-backend"}

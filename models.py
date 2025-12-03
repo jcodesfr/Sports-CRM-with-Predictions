@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Date, ForeignKey
+from sqlalchemy import String, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from db import Base
 
@@ -30,22 +30,25 @@ class Player(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key = True, index = True)
     name: Mapped[str] = mapped_column(String, index = True)
     position: Mapped[str | None] = mapped_column(String, nullable = True)
-    team_id: Mapped[int | None] = mapped_column(ForeignKey("teams.id"), nullable = True)
 
+    team_id: Mapped[int | None] = mapped_column(ForeignKey("teams.id"), nullable = True)
     team: Mapped[Team | None] = relationship("Team", back_populates = "players")
+
+    career_time: Mapped[str | None] = mapped_column(String, nullable = True)
+    player_health: Mapped[str | None] = mapped_column(String, nullable = True)
 
 
 class Fixture(Base):
     __tablename__ = "fixtures"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key = True, index = True)
-    team_id: Mapped[int] = mapped_column(ForeignKey("teams.id"))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    team_id: Mapped[int | None] = mapped_column(ForeignKey("teams.id"), nullable=True)
     opponent: Mapped[str] = mapped_column(String)
-    date: Mapped[str] = mapped_column(String)  # MM-DD-YYYY Format
-    venue: Mapped[str | None] = mapped_column(String, nullable = True)
-    stage: Mapped[str] = mapped_column(String, default = "Upcoming")  # Upcoming|Played
+    date: Mapped[str] = mapped_column(String)
+    location: Mapped[str | None] = mapped_column(String, nullable=True)
 
-    team: Mapped[Team] = relationship("Team", back_populates = "fixtures")
+    team: Mapped["Team"] = relationship("Team", back_populates="fixtures")
+
 
 
 class Prediction(Base):

@@ -2,7 +2,7 @@ from enum import Enum
 from pydantic import BaseModel
 from typing import Optional, List
 
-# ---- Sports
+# ---- Supported Sports
 class SportName(str, Enum):
     basketball = "Basketball"
     soccer = "Soccer"
@@ -31,35 +31,38 @@ class TeamOut(BaseModel):
         from_attributes = True
 
 # ---- Players
-class PlayerCreate(BaseModel):
+class PlayerBase(BaseModel):
     name: str
     position: Optional[str] = None
     team_id: Optional[int] = None
+    career_time: Optional[str] = None
+    player_health: Optional[str] = None
 
-class PlayerOut(BaseModel):
+
+class PlayerCreate(PlayerBase):
+    pass
+
+
+class PlayerOut(PlayerBase):
     id: int
-    name: str
-    position: Optional[str] = None
-    team_id: Optional[int] = None
 
     class Config:
         from_attributes = True
 
 # ---- Fixtures
-class FixtureCreate(BaseModel):
-    team_id: int
-    opponent: str
-    date: str  # "MM-DD-YYYY"
-    venue: Optional[str] = None
-    stage: Optional[str] = "Upcoming"
-
-class FixtureOut(BaseModel):
-    id: int
-    team_id: int
+class GameBase(BaseModel):
+    team_id: Optional[int] = None
     opponent: str
     date: str
-    venue: Optional[str] = None
-    stage: str
+    location: Optional[str] = None
+
+
+class GameCreate(GameBase):
+    pass
+
+
+class GameOut(GameBase):
+    id: int
 
     class Config:
         from_attributes = True
