@@ -11,20 +11,32 @@ export default function Teams() {
     sport_id: '',
   })
 
+  // load teams
+  const loadTeams = () => {
+    api
+      .listTeams()
+      .then((data) => {
+        console.log('TEAMS FROM API:', data)
+        setTeams(data)
+      })
+      .catch((err) => {
+        console.error('Error loading teams', err)
+      })
+  }
+
   useEffect(() => {
+    // load sports
     api
       .listSports()
-      .then(setSports)
+      .then((data) => {
+        console.log('SPORTS FROM API:', data)
+        setSports(data)
+      })
       .catch((err) => {
         console.error('Error loading sports', err)
       })
 
-    api
-      .listTeams()
-      .then(setTeams)
-      .catch((err) => {
-        console.error('Error loading teams', err)
-      })
+    loadTeams()
   }, [])
 
   const handleChange = (field) => (e) => {
@@ -44,9 +56,9 @@ export default function Teams() {
         sport_id: form.sport_id ? Number(form.sport_id) : null,
       }
 
-      const created = await api.createTeam(payload)
+      await api.createTeam(payload)
 
-      setTeams((prev) => [...prev, created])
+      loadTeams()
 
       setForm({
         name: '',
@@ -63,40 +75,49 @@ export default function Teams() {
     <>
       <h1>Teams</h1>
 
-      <div className="card" style={{ marginBottom: '1rem' }}>
-        <form onSubmit={handleSubmit} className="form">
-          <div className="form-row">
-            <input
-              type="text"
-              value={form.name}
-              onChange={handleChange('name')}
-              placeholder="Team Name"
-              required
-            />
+      <div className = "card" style={{ marginBottom: '1rem' }}>
+        <form onSubmit = {handleSubmit} className = "form">
+          <div className = "form-row">
+            <label>
+              Team Name:
+              <input
+                type = "text"
+                value = {form.name}
+                onChange = {handleChange('name')}
+                placeholder = "Name"
+                required
+              />
+            </label>
+          </div>
+
+          <div className = "form-row">
+            <label>
+              League Name:
+              <input
+                type = "text"
+                value = {form.league}
+                onChange = {handleChange('league')}
+                placeholder = "League"
+              />
+            </label>
           </div>
 
           <div className="form-row">
-            <input
-              type="text"
-              value={form.league}
-              onChange={handleChange('league')}
-              placeholder="League Name"
-            />
-          </div>
-
-          <div className="form-row">
-            <select
-              value={form.sport_id}
-              onChange={handleChange('sport_id')}
-              required
-            >
-              <option value="">Select Sport</option>
-              {sports.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.name}
-                </option>
-              ))}
-            </select>
+            <label>
+              Sport:
+              <select
+                value = {form.sport_id}
+                onChange = {handleChange('sport_id')}
+                required
+              >
+                <option value = "">Select sport</option>
+                {sports.map((s) => (
+                  <option key = {s.id} value={s.id}>
+                    {s.name}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
 
           <div className="form-row">
@@ -105,7 +126,16 @@ export default function Teams() {
         </form>
       </div>
 
-      <Table cols={['ID', 'Name', 'League', 'Sport ID']} rows={teams} />
+      <Table
+        cols={['id', 'name', 'league', 'sport_id']}
+        rows={teams}
+        colLabels={{
+          id: 'ID',
+          name: 'Team Name',
+          league: 'League',
+          sport_id: 'Sport',
+        }}
+      />
     </>
   )
 }
