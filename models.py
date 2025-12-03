@@ -2,6 +2,14 @@ from sqlalchemy import Column, String, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from db import Base
 
+class Sport(Base):
+    __tablename__ = "sports"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key = True, index = True)
+    name: Mapped[str] = mapped_column(String, unique = True, index = True)
+
+    teams: Mapped[list["Team"]] = relationship("Team", back_populates = "sport")
+
 class Team(Base):
     __tablename__ = "teams"
 
@@ -25,14 +33,6 @@ class Player(Base):
     team_id: Mapped[int | None] = mapped_column(ForeignKey("teams.id"), nullable = True)
 
     team: Mapped[Team | None] = relationship("Team", back_populates = "players")
-
-class Sport(Base):
-    __tablename__ = "sports"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key = True, index = True)
-    name: Mapped[str] = mapped_column(String, unique = True, index = True)
-
-    teams: Mapped[list["Team"]] = relationship("Team", back_populates = "sport")
 
 
 class Fixture(Base):
