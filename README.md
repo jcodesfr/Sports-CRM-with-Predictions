@@ -6,4 +6,5 @@ To Run Program:
 2) cd into */env/Scripts/python.exe
 3) Run command "-m uvicorn main:app --reload"
 4) Open another new Terminal (regular command prompt/cmd)
-5) Run command "npm run dev"
+5) cd into */sports-crm-frontend
+6) Run command "npm run dev"
