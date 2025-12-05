@@ -1,4 +1,4 @@
-from sqlalchemy import String, Integer, Date, ForeignKey
+from sqlalchemy import String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from db import Base
 
@@ -55,8 +55,8 @@ class Prediction(Base):
     __tablename__ = "predictions"
 
     id: Mapped[int] = mapped_column(Integer, primary_key = True, index = True)
-    fixture_id: Mapped[int] = mapped_column(ForeignKey("fixtures.id"))
     player_id: Mapped[int] = mapped_column(ForeignKey("players.id"))
-    metric: Mapped[str] = mapped_column(String)    # metric to be predicted
-    value: Mapped[float] = mapped_column()         # prediction result
-    model: Mapped[str | None] = mapped_column(String, nullable = True)
+    prediction_metric: Mapped[str] = mapped_column(String)
+    predicted_value: Mapped[float] = mapped_column(Float)
+
+    player: Mapped["Player"] = relationship("Player")

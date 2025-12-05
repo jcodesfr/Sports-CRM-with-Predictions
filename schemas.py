@@ -68,20 +68,16 @@ class GameOut(GameBase):
         from_attributes = True
 
 # ---- Predictions
-class PredictionCreate(BaseModel):
-    fixture_id: int
+class PredictionBase(BaseModel):
     player_id: int
-    metric: str
-    value: float
-    model: Optional[str] = None
+    prediction_metric: str
+    predicted_value: float
 
-class PredictionOut(BaseModel):
+class PredictionCreate(PredictionBase):
+    pass
+
+class PredictionOut(PredictionBase):
     id: int
-    fixture_id: int
-    player_id: int
-    metric: str
-    value: float
-    model: Optional[str] = None
 
     class Config:
         from_attributes = True
