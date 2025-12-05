@@ -24,6 +24,7 @@ export const api = {
   createGame: (payload) => http('/fixtures', { method: 'POST', body: JSON.stringify(payload)}),
 
   listPredictions: () => http('/predictions'),
+  createPrediction: (payload) => http('/predictions', { method: 'POST', body: JSON.stringify(payload)}),
   runPredictions: (items) => http('/predictions/run', { method: 'POST', body: JSON.stringify({ items }) }),
 
   listSports: () => http('/sports'),
